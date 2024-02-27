@@ -43,9 +43,9 @@ st.sidebar.title("Movie Recommendation App")
 st.sidebar.image("movie image.png", use_column_width=True)
 
 movie_recommender = MovieRecommender('final_data.csv')
-movie_title = st.sidebar.selectbox("Select a Movie", movie_recommender.movie_info['Title'].values)
+movie_title = st.sidebar.selectbox("Select a Movie", movie_recommender.movie_info['Title'].values, placeholder="Select a Movie")
 # movie_title = st.sidebar.selectbox(options=movie_title["Title"])
-recommendation_count=st.sidebar.number_input("Enter the recommendation count",min_value=1,step=1)
+recommendation_count=st.sidebar.number_input("Enter the recommendation count", min_value=1,max_value=10,step=1)
 
 if movie_title and recommendation_count:
     recommendations = movie_recommender.recommend_similar_movies(movie_title,
