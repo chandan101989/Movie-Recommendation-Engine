@@ -38,7 +38,7 @@ class MovieRecommender:
 st.title("Movie Recommendation App")
 st.write("Enter a movie title to find similar movies based on genre similarity.")
 
-movie_recommender = MovieRecommender('movie_info.csv')
+movie_recommender = MovieRecommender('final_data.csv')
 movie_title = st.text_input("Enter Movie Title")
 
 if movie_title:
