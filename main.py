@@ -4,6 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
 
+# Function to create a MovieRecommender class
 class MovieRecommender:
     def __init__(self, movie_data_path):
         self.movie_info = pd.read_csv(movie_data_path)
@@ -22,31 +23,39 @@ class MovieRecommender:
             similarity_scores = similarity_scores.sort_values(ascending=False)
             empty_list = []
             for i in range(len(similarity_scores)):  # Adjusted loop range
-                result = {'Title': self.movie_info.loc[similarity_scores.index[i], 'Title'],
-                          'Genre': self.movie_info.loc[similarity_scores.index[i], 'Genre']
+                rec_index = similarity_scores.index[i]
+                if rec_index != self.index[movie_title_lower]:
+                    result = {'Title': self.movie_info.loc[rec_index, 'Title'],
+                              'Genre': self.movie_info.loc[rec_index, 'Genre']
 
-                          }
-                empty_list.append(result)
-                if len(empty_list) == n:
-                    break
+                              }
+                    empty_list.append(result)
+                    if len(empty_list) == n:
+                        break
             return empty_list
         else:
             return None
 
 
 # Streamlit UI
-st.title("Movie Recommendation App")
-st.write("Enter a movie title to find similar movies based on genre similarity.")
+st.set_page_config(layout="wide")
+st.sidebar.title("Movie Recommendation App")
+st.sidebar.image("movie image.png", use_column_width=True)
 
 movie_recommender = MovieRecommender('final_data.csv')
-movie_title = st.text_input("Enter Movie Title")
+movie_title = st.sidebar.selectbox("Select a Movie", movie_recommender.movie_info['Title'].values)
+# movie_title = st.sidebar.selectbox(options=movie_title["Title"])
+recommendation_count=st.sidebar.number_input("Enter the recommendation count",min_value=1,step=1)
 
-if movie_title:
+if movie_title and recommendation_count:
     recommendations = movie_recommender.recommend_similar_movies(movie_title,
-                                                                 n=5)  # Specify the number of recommendations
+                                                                 n=recommendation_count)  # Specify the number of recommendations
     if recommendations:
-        st.write("### Recommendations")
+        st.subheader(f"Recommendations for the movie '{movie_title.upper()}'")
+        st.markdown("---")
         for i, rec in enumerate(recommendations):
-            st.write(f"{i + 1}. **{rec['Title']}** - Genre: {rec['Genre']}")
+            st.write(f"**{i + 1}. {rec['Title']}**")
+            st.write(f"   - Genre: {rec['Genre']}")
+            st.markdown("---")
     else:
-        st.write("Movie not found in the database.")
+        st.error("Movie not found in the database.")
