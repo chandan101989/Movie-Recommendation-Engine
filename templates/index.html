@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input[type="text"], input[type="number"], input[type="submit"] {
+            padding: 10px;
+            margin: 5px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Recommender</h1>
+        <form method="POST">
+            <label for="movie_name">Enter Movie Name:</label><br>
+            <input type="text" id="movie_name" name="movie_name" value="{{ movie_name }}"><br>
+            <label for="num_recommendations">Number of Recommendations:</label><br>
+            <input type="number" id="num_recommendations" name="num_recommendations" value=""><br><br>
+            <input type="submit" value="Get Recommendations">
+        </form>
+        <br>
+        {% if recommendations %}
+            <h2>Recommended Movies for "{{ movie_name }}"</h2>
+            <ul>
+                {% for movie in recommendations %}
+                    <li>Title: {{ movie.Title }}, Genre: {{ movie.Genre }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <footer>
+        Made with ❤️ by Chandan Kumar M
+    </footer>
+</body>
+</html>
