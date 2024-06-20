@@ -8,7 +8,7 @@ Workflow of the problem-
 
 1. Data Collection- Web Scraping to get required datas from the website
 2. Data cleaning and preprocessing
-3. Machine learning - 
+3. Used Machine learning and NLP concept TfidfVectorizer  
 4. Applied Word2Vec methodology during the model-building phase to create comprehensive list of related genre
    movies.
 5. Use of Word2Vec significantly improved the recommendation engine’s accuracy, offering users a broader selection
