@@ -15,4 +15,8 @@ Workflow of the problem-
    of movie options for a more personalized experience.
 
 
-# Deployed link below mentioned https://chandanmovierecommendationengine.streamlit.app/
+# Deployed link below mentioned 
+ https://chandanmovierecommendationengine.streamlit.app/
+
+ ![image](https://github.com/chandan101989/Movie-Recommendation-Engine/assets/109066364/13db63ac-ad3f-46a5-96b7-b155f5c55a0a)
+
